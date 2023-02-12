@@ -7,7 +7,7 @@ import  {Filter}  from "./Filter/Filter"
 
 
 import Box from "./Box/Box"
-import {  useEffect } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { filterActions } from 'redux/Filter/filterSlice'
 // import { contactsAddActions, contactsDeleteActions } from 'redux/Contacts/contactsSlice'
@@ -46,6 +46,7 @@ const  App = () => {
           }
           
           dispatch(addContactsThunk(itemName))
+          console.log(itemName, '4')
         }
     }
   

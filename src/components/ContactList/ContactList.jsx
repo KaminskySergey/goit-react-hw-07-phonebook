@@ -5,7 +5,7 @@ import Box from 'components/Box/Box'
 
 export const ContactList = ({itemName,onClickDelete, isLoading}) => {
     
-
+    console.log(itemName)
     return (
         <>
         <Box as="ul" p={0} m={0}>

@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const ContactForm = ({onSubmit}) => {
     const [name, setName] = useState('')
-    const [number, setNumber] = useState('')
+    const [phone, setPhone] = useState('')
     
     const nameId = nanoid();
     const telId = nanoid()
@@ -20,7 +20,7 @@ const ContactForm = ({onSubmit}) => {
                 setName(value)
                 break;
             case 'number':
-                setNumber(value)
+                setPhone(value)
                 break;
             default:
                 return;
@@ -29,14 +29,14 @@ const ContactForm = ({onSubmit}) => {
 
     const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit({name, number});
+    onSubmit({name, phone});
     
     reset()
 }
 
 const reset = () => {
         setName('')
-        setNumber('')
+        setPhone('')
 }
 
 return (
@@ -61,7 +61,7 @@ return (
                 required
                 placeholder="Tel:"
                 onChange={handeChange}
-                value={number}
+                value={phone}
                 />
                 </label>
     
