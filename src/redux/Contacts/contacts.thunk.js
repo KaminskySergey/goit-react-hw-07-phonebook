@@ -3,14 +3,20 @@ import axios from "axios";
 
 
 
-export const getContactsThunk = createAsyncThunk('contacts', async () => {
-    const {data} = await axios.get('https://63e6298883c0e85a868dde63.mockapi.io/pet/v1/contacts')
-    console.log(data, 'data');
+export const getContactsThunk = createAsyncThunk('fetchAll', async () => {
+    const {data} = await axios.get('https://63e8b493b120461c6be464c1.mockapi.io/api/v1/contacts')
     return data;
 })
 
-// export const getContactsThunk = createAsyncThunk('contacts', async () => {
-//     const {data} = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=102d4305e0abdbf0fd48836d5abb1978&language=en-US&page=1`)
-//     console.log(data.results, 'rttrtrtrtrtrt');
-//     return data.results
-//     })
+export const addContactsThunk = createAsyncThunk('addContact', async ({id, name, phone}) => {
+    console.log(id);
+    console.log(name);
+    console.log(phone);
+    const {data} = await axios.post('https://63e8b493b120461c6be464c1.mockapi.io/api/v1/contacts', {id, name, phone})
+    return data
+})
+
+export const deleteConactsThunk = createAsyncThunk('deleteConacts', async(id) => {
+    const {data} = await axios.delete(`https://63e8b493b120461c6be464c1.mockapi.io/api/v1/contacts/${id}`, )
+    return data;
+})

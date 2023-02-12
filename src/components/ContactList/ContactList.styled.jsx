@@ -25,6 +25,8 @@ export const ContactButton = styled.button`
     border: transparent;
     padding: ${p => p.theme.space[1]}px;
     transition: all 250ms;
+    display: flex;
+    align-items: center;
 
     &:hover, &:focus {
         background-color: ${p => p.theme.colors.red};

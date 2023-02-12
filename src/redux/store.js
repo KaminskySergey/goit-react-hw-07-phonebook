@@ -18,28 +18,31 @@ const initState = {
     filter: initFilter,
 }
 console.log(initState, 'ttt')
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['contacts'],
-}
-const rootReducer = combineReducers({
-    filter: filterReducer,
-    contacts: contactsReducer,
-})
+// const persistConfig = {
+//     key: 'root',
+//     storage,
+//     whitelist: ['contacts'],
+// }
+// const rootReducer = combineReducers({
+//     filter: filterReducer,
+//     contacts: contactsReducer,
+// })
 
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+// const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
     preloadedState: initState,
     devTools: true,
-    reducer: persistedReducer,
+    reducer: {
+        contacts: contactsReducer,
+        filter: filterReducer,
+    },
 
-    middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+    // middleware: (getDefaultMiddleware) =>
+    // getDefaultMiddleware({
+    //   serializableCheck: {
+    //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    //   },
+    // }),
 })
 
-export const persistor = persistStore(store)
+// export const persistor = persistStore(store)
