@@ -6,16 +6,26 @@ import  {Filter}  from "./Filter/Filter"
 
 
 import Box from "./Box/Box"
-import { useState, useEffect, useMemo } from "react"
+import {  useEffect, useMemo } from "react"
+import { useDispatch, useSelector } from 'react-redux'
+import { filterActions } from 'redux/Filter/filterSlice'
+import { contactsAddActions, contactsDeleteActions } from 'redux/Contacts/contactsSlice'
+import { getContactsThunk } from 'redux/Contacts/contacts.thunk'
+
 
 
 
 const  App = () => {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('contacts')) ?? []
-  })
-  const [filter, setFilter] = useState('')
+  const dispatch = useDispatch()
+  const contacts = useSelector(state => state.contacts)
+  const filter = useSelector(state => state.filter.filter)
   
+  console.log(contacts, '555');
+  
+  useEffect(() => {
+    dispatch(getContactsThunk())
+  }, [dispatch])
+
   const addNameForm = (data) => {
     console.log(data);
         const filterByName = contacts.some(el => el.name === data.name)
@@ -30,12 +40,12 @@ const  App = () => {
             
           }
           
-          setContacts(prevState => [itemName, ...prevState])
+          dispatch(contactsAddActions(itemName))
         }
     }
   
     const handleFilter = (e) => {
-      setFilter(e.target.value)
+      dispatch(filterActions(e.target.value))
 }
     
     const handleSearchInput = useMemo(() => {
@@ -46,12 +56,11 @@ const  App = () => {
     
     const handleDeleteContact = (contactId) => {
   console.log(contactId);
-  setContacts(prevState => prevState.filter((item) => item.id !== contactId))
+  dispatch(contactsDeleteActions(contactId))
+  
 }
 
-useEffect(() => {
-  window.localStorage.setItem('contacts', JSON.stringify(contacts))
-}, [contacts])
+
     
 
     
